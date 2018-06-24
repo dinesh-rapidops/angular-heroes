@@ -55,7 +55,7 @@ Set this component inside the `app.component.html` file
     <app-hero-list></app-hero-list>
 ```
 
-Add list of the heroes inside the 
+Add list of the heroes inside the file `hero-list/hero-list.component.ts`
 ```typescript
   heroes: Hero[]= [
     { name:'Thor', id:1},
@@ -64,4 +64,12 @@ Add list of the heroes inside the
     { name:'Black Panther', id:4},
     { name:'Ant Man', id:5}
   ];
+```
+
+Set the html file with following code 
+```html 
+<h2>Hero List</h2>
+<li *ngFor="let hero of heroes">
+    {{hero.id}} - {{hero.name}}
+</li>
 ```
