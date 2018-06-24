@@ -1,67 +1,73 @@
-# Let's Display some heroes
+#Input / Output
 
-## Display Hero details
-
-Create new file `src/app/hero.ts` , copy the following content 
+## Input
+Define one public variable inside the app component 
 ```typescript
-export class Hero {
-  id: number;
-  name: string;
-}
+  selectedHero:Hero
 ```
 
-Import file into `app.compontent.ts`.
+Set the following function inside your component
 ```typescript
-import { Hero } from '../hero';
-```
-
-Add new hero 
-```typescript
-  hero: Hero = {
-    name:'IronMan',
-    id:1
+  setSelectedHero(id){
+    this.selectedHero = this.heroes.find(hero => hero.id === id);
   }
 ```
 
-Set the hero details in `app.component.html` file
+Listen to click event of hero list 
 ```html
-    <h2>{{ hero.name }} Details</h2>
-    <div><span>id: </span>{{hero.id}}</div>
-    <div><span>name: </span>{{hero.name}}</div>
+<li *ngFor="let hero of heroes" (click)="setSelectedHero(hero.id)">
 ```
 
-Move this to new component - HeroDetailComponent
-```cmd 
-    ng generate component HeroDetail
+Show the selected hero in html 
+```html
+ Selected Hero :: {{selectedHero?.name}}
 ```
 
-Set this component inside the `app.component.html` file
-```html 
-    <app-hero-detail></app-hero-detail>
-```
+Put the `<app-hero-detail></app-hero-detail>` inside the `hero-list.component.html` file.
 
-Move the html file content and ts file contets from `app.component.ts` file to `hero-details/hero-details.component.ts`
-
-
-## Display Hero lists
-
-Create hero list with following command 
-```cmd 
-    ng generate component HeroList
-```
-
-Set this component inside the `app.component.html` file
-```html 
-    <app-hero-list></app-hero-list>
-```
-
-Add list of the heroes inside the 
+Set the input variable inside `app-hero-detail.component.ts` file.
 ```typescript
-  heroes: Hero[]= [
-    { name:'Thor', id:1},
-    { name:'IronMan', id:2},
-    { name:'Captain America', id:3},
-    { name:'Black Panther', id:4},
-    { name:'Ant Man', id:5}
-  ];
+@Input() hero: Hero;
+```
+
+Pass the data with html - `app-hero-list.component.ts` file.
+```html
+<app-hero-detail [hero]="selectedHero" *ngIf="selectedHero"></app-hero-detail>
+```
+
+
+## Output
+
+Set the variable in `hero-detail-component.ts`
+```typescript
+@Output() whoIam = new EventEmitter();
+```
+
+Set one button to identify the hero inside the list in html 
+```html
+<button (click)="onIdentityCheck()"> Who I am </button>
+```
+
+Put event listner of click event in ts file
+```typescript
+onIdentityCheck(){
+    this.whoIam.emit(this.hero);
+  }
+```
+
+Change html inside the `hero-list.component.html` file as
+```html
+<app-hero-detail [hero]="selectedHero" *ngIf="selectedHero" (whoIam)="hilightSelected($event)"></app-hero-detail>
+<h2>Hero List</h2>
+Selected Hero =  {{selectedHero?.name}}
+<li *ngFor="let hero of heroes" (click)="setSelectedHero(hero.id)" [style.background]="hilightId===hero.id?'red':''">
+    {{hero.id}} - {{hero.name}}
+</li>
+```
+
+Add new event inside the `hero-list.component.ts` file as 
+```typescript
+  hilightSelected(selectedHero){
+    this.hilightId = selectedHero.id;
+  }
 ```

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Hero } from '../../hero';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Hero } from '../hero';
 
 @Component({
   selector: 'app-hero-detail',
@@ -7,13 +7,15 @@ import { Hero } from '../../hero';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
-  hero: Hero = {
-    name:'IronMan',
-    id:1
-  }
+  @Input() hero: Hero;
+  @Output() whoIam = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onIdentityCheck(){
+    this.whoIam.emit(this.hero);
+  }
 }

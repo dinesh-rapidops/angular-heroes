@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from './hero';
+import { Hero } from '../hero';
 
 @Component({
   selector: 'app-hero-list',
@@ -14,10 +14,19 @@ export class HeroListComponent implements OnInit {
     { name:'Black Panther', id:4},
     { name:'Ant Man', id:5}
   ];
+  selectedHero: Hero;
+  hilightId: number;
   
   constructor() { }
 
   ngOnInit() {
   }
+
+  hilightSelected(selectedHero){
+    this.hilightId = selectedHero.id;
+  }
   
+  setSelectedHero(id){
+    this.selectedHero = this.heroes.find(hero => hero.id === id);
+  }
 }
