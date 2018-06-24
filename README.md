@@ -52,7 +52,7 @@ getHeroes():Observable<Hero[]>{
 
 Change the ngOnInit hook as following
 ```typescript
-    ngOnInit() {
+  ngOnInit() {
     this.heroService.getHeroes()
       .subscribe((heroes)=>{
         this.heroes = heroes;
