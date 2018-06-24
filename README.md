@@ -56,5 +56,12 @@ Set this component inside the `app.component.html` file
 ```
 
 Add list of the heroes inside the 
-
-
+```typescript
+  heroes: Hero[]= [
+    { name:'Thor', id:1},
+    { name:'IronMan', id:2},
+    { name:'Captain America', id:3},
+    { name:'Black Panther', id:4},
+    { name:'Ant Man', id:5}
+  ];
+```
