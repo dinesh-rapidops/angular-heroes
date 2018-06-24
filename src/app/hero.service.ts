@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './hero';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
-
-  constructor() { }
+  heroesUrl = 'http://localhost:3000/heroes';
+  constructor(private http:HttpClient) { }
 
   getHeroes():Observable<Hero[]>{
-    return of(<Hero[]>[
-      { name:'Thor', id:1},
-      { name:'IronMan', id:2},
-      { name:'Captain America', id:3},
-      { name:'Black Panther', id:4},
-      { name:'Ant Man', id:5},
-      { name:'BatMan', id:6},
-      { name:'Wonder Woman', id:7}
-    ]);
+    return this.http.get<Hero[]>(this.heroesUrl);
   }
 }

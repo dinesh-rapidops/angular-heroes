@@ -1,61 +1,22 @@
-# Services
+# HTTP
 
-## DI
+## Get all heroes with http
 
-## Get hero list from service
+import `HttpClientModule` inside `app.module.ts`
 
-generate new service with following command
-```cmd
-ng generate service hero
-```
-
-Copy the following function in heroService
+inject `HttpClient` inside `hero.service.ts`
 ```typescript
-getHeroes():Hero[]{
-    return <Hero[]>[
-      { name:'Thor', id:1},
-      { name:'IronMan', id:2},
-      { name:'Captain America', id:3},
-      { name:'Black Panther', id:4},
-      { name:'Ant Man', id:5},
-      { name:'BatMan', id:6},
-      { name:'Wonder Woman', id:7}
-    ];
-  }
+constructor(private http:HttpClient) { }
 ```
 
-Remove the static data from the `hero-list.component.ts` file
-
-Copy following in ngOnInit hook
+set the heroes url inside `hero.service.ts`
 ```typescript
-  ngOnInit() {
-    this.heroes = this.heroService.getHeroes();
-  }
+heroesUrl = 'http://localhost:3000/heroes';
 ```
 
-## Observables
-
-Change the following function in heroService
+modify getHeroes service 
 ```typescript
 getHeroes():Observable<Hero[]>{
-    return of(<Hero[]>[
-      { name:'Thor', id:1},
-      { name:'IronMan', id:2},
-      { name:'Captain America', id:3},
-      { name:'Black Panther', id:4},
-      { name:'Ant Man', id:5},
-      { name:'BatMan', id:6},
-      { name:'Wonder Woman', id:7}
-    ]);
-  }
-```
-
-Change the ngOnInit hook as following
-```typescript
-  ngOnInit() {
-    this.heroService.getHeroes()
-      .subscribe((heroes)=>{
-        this.heroes = heroes;
-      })
-  }
+  return this.http.get<Hero[]>(this.heroesUrl);
+}
 ```
