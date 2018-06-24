@@ -1,20 +1,60 @@
-# Angular Heroes
+# Let's Display some heroes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+## Display Hero details
 
-## Generate project with following command
+Create new file `src/app/hero.ts` , copy the following content 
+```typescript
+export class Hero {
+  id: number;
+  name: string;
+}
+```
 
-Run `ng new angular-heroes` to create the proect
+Import file into `app.compontent.ts`.
+```typescript
+import { Hero } from '../hero';
+```
 
-## Development server
+Add new hero 
+```typescript
+  hero: Hero = {
+    name:'IronMan',
+    id:1
+  }
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Set the hero details in `app.component.html` file
+```html
+    <h2>{{ hero.name }} Details</h2>
+    <div><span>id: </span>{{hero.id}}</div>
+    <div><span>name: </span>{{hero.name}}</div>
+```
 
-## Make some changes 
+Move this to new component - HeroDetailComponent
+```cmd 
+    ng generate component HeroDetail
+```
 
-Goto file `src/app/app.component.html` and replace it with following
+Set this component inside the `app.component.html` file
 ```html 
-<h1>{{title}}</h1> 
-``` 
+    <app-hero-detail></app-hero-detail>
+```
 
-Goto file `src/app/app.component.ts` and set the title as `Angular Heroes` and see the chnages on app.
+Move the html file content and ts file contets from `app.component.ts` file to `hero-details/hero-details.component.ts`
+
+
+## Display Hero lists
+
+Create hero list with following command 
+```cmd 
+    ng generate component HeroList
+```
+
+Set this component inside the `app.component.html` file
+```html 
+    <app-hero-list></app-hero-list>
+```
+
+Add list of the heroes inside the 
+
+
