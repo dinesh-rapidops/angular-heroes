@@ -10,7 +10,7 @@ Run `ng new angular-heroes` to create the proect
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-##Make some changes 
+## Make some changes 
 
 Goto file `src/app/app.component.html` and replace it with following
 ```html 
