@@ -1,73 +1,62 @@
-#Input / Output
+# Directive / Filters
 
-## Input
-Define one public variable inside the app component 
-```typescript
-  selectedHero:Hero
+### Directives
+Create new directive with following command
+```cmd
+  ng generate directive highlight
 ```
 
-Set the following function inside your component
+Copy the following code into `highlight.directive.ts`
 ```typescript
-  setSelectedHero(id){
-    this.selectedHero = this.heroes.find(hero => hero.id === id);
+import { Directive, ElementRef, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+  constructor(private el: ElementRef) { }
+
+  @HostListener('mouseenter') onMouseEnter() {
+    this.highlight('green');
   }
-```
 
-Listen to click event of hero list 
-```html
-<li *ngFor="let hero of heroes" (click)="setSelectedHero(hero.id)">
-```
-
-Show the selected hero in html 
-```html
- Selected Hero :: {{selectedHero?.name}}
-```
-
-Put the `<app-hero-detail></app-hero-detail>` inside the `hero-list.component.html` file.
-
-Set the input variable inside `app-hero-detail.component.ts` file.
-```typescript
-@Input() hero: Hero;
-```
-
-Pass the data with html - `app-hero-list.component.ts` file.
-```html
-<app-hero-detail [hero]="selectedHero" *ngIf="selectedHero"></app-hero-detail>
-```
-
-
-## Output
-
-Set the variable in `hero-detail-component.ts`
-```typescript
-@Output() whoIam = new EventEmitter();
-```
-
-Set one button to identify the hero inside the list in html 
-```html
-<button (click)="onIdentityCheck()"> Who I am </button>
-```
-
-Put event listner of click event in ts file
-```typescript
-onIdentityCheck(){
-    this.whoIam.emit(this.hero);
+  @HostListener('mouseleave') onMouseLeave() {
+    this.highlight(null);
   }
-```
 
-Change html inside the `hero-list.component.html` file as
-```html
-<app-hero-detail [hero]="selectedHero" *ngIf="selectedHero" (whoIam)="hilightSelected($event)"></app-hero-detail>
-<h2>Hero List</h2>
-Selected Hero =  {{selectedHero?.name}}
-<li *ngFor="let hero of heroes" (click)="setSelectedHero(hero.id)" [style.background]="hilightId===hero.id?'red':''">
-    {{hero.id}} - {{hero.name}}
-</li>
-```
-
-Add new event inside the `hero-list.component.ts` file as 
-```typescript
-  hilightSelected(selectedHero){
-    this.hilightId = selectedHero.id;
+  private highlight(color: string) {
+    this.el.nativeElement.style.color = color;
   }
+}
+```
+
+## Filters
+
+Create new directive with following command
+```cmd
+  ng generate pipe heroFilter
+```
+
+Copy the following code into `highlight.directive.ts`
+```typescript
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'heroFilter'
+})
+export class HeroFilterPipe implements PipeTransform {
+  avengerHeroes:string[] = ['Thor','IronMan','Captain America','Black Panther','Ant Man'];
+
+  transform(value: any, args?: any): any {
+    const foundAvenger = this.avengerHeroes.find((hero)=>{
+      return hero.toLowerCase() === value.toLowerCase();
+    });
+    if(foundAvenger){
+      return value + ' (Avenger)';
+    } else {
+      return value;
+    }
+  }
+
+}
 ```

@@ -12,7 +12,9 @@ export class HeroListComponent implements OnInit {
     { name:'IronMan', id:2},
     { name:'Captain America', id:3},
     { name:'Black Panther', id:4},
-    { name:'Ant Man', id:5}
+    { name:'Ant Man', id:5},
+    { name:'BatMan', id:6},
+    { name:'Wonder Woman', id:7}
   ];
   selectedHero: Hero;
   hilightId: number;

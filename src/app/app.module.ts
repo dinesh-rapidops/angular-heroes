@@ -4,12 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroListComponent } from './hero-list/hero-list.component';
+import { HighlightDirective } from './highlight.directive';
+import { HeroFilterPipe } from './hero-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroDetailComponent,
-    HeroListComponent
+    HeroListComponent,
+    HighlightDirective,
+    HeroFilterPipe
   ],
   imports: [
     BrowserModule
