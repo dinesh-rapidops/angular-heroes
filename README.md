@@ -1,62 +1,61 @@
-# Directive / Filters
+# Services
 
-### Directives
-Create new directive with following command
+## DI
+
+## Get hero list from service
+
+generate new service with following command
 ```cmd
-  ng generate directive highlight
+ng generate service hero
 ```
 
-Copy the following code into `highlight.directive.ts`
+Copy the following function in heroService
 ```typescript
-import { Directive, ElementRef, HostListener } from '@angular/core';
-
-@Directive({
-  selector: '[appHighlight]'
-})
-export class HighlightDirective {
-  constructor(private el: ElementRef) { }
-
-  @HostListener('mouseenter') onMouseEnter() {
-    this.highlight('green');
+getHeroes():Hero[]{
+    return <Hero[]>[
+      { name:'Thor', id:1},
+      { name:'IronMan', id:2},
+      { name:'Captain America', id:3},
+      { name:'Black Panther', id:4},
+      { name:'Ant Man', id:5},
+      { name:'BatMan', id:6},
+      { name:'Wonder Woman', id:7}
+    ];
   }
-
-  @HostListener('mouseleave') onMouseLeave() {
-    this.highlight(null);
-  }
-
-  private highlight(color: string) {
-    this.el.nativeElement.style.color = color;
-  }
-}
 ```
 
-## Filters
+Remove the static data from the `hero-list.component.ts` file
 
-Create new directive with following command
-```cmd
-  ng generate pipe heroFilter
-```
-
-Copy the following code into `highlight.directive.ts`
+Copy following in ngOnInit hook
 ```typescript
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({
-  name: 'heroFilter'
-})
-export class HeroFilterPipe implements PipeTransform {
-  avengerHeroes:string[] = ['Thor','IronMan','Captain America','Black Panther','Ant Man'];
-
-  transform(value: any, args?: any): any {
-    const foundAvenger = this.avengerHeroes.find((hero)=>{
-      return hero.toLowerCase() === value.toLowerCase();
-    });
-    if(foundAvenger){
-      return value + ' (Avenger)';
-    } else {
-      return value;
-    }
+  ngOnInit() {
+    this.heroes = this.heroService.getHeroes();
   }
+```
 
-}
+## Observables
+
+Change the following function in heroService
+```typescript
+getHeroes():Observable<Hero[]>{
+    return of(<Hero[]>[
+      { name:'Thor', id:1},
+      { name:'IronMan', id:2},
+      { name:'Captain America', id:3},
+      { name:'Black Panther', id:4},
+      { name:'Ant Man', id:5},
+      { name:'BatMan', id:6},
+      { name:'Wonder Woman', id:7}
+    ]);
+  }
+```
+
+Change the ngOnInit hook as following
+```typescript
+    ngOnInit() {
+    this.heroService.getHeroes()
+      .subscribe((heroes)=>{
+        this.heroes = heroes;
+      })
+  }
 ```
