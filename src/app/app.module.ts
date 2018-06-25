@@ -7,6 +7,9 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroListComponent } from './hero-list/hero-list.component';
 import { HighlightDirective } from './highlight.directive';
 import { HeroFilterPipe } from './hero-filter.pipe';
+import { AddHeroComponent } from './add-hero/add-hero.component';
+import { FormsModule } from '@angular/forms'; 
+
 
 @NgModule({
   declarations: [
@@ -14,11 +17,13 @@ import { HeroFilterPipe } from './hero-filter.pipe';
     HeroDetailComponent,
     HeroListComponent,
     HighlightDirective,
-    HeroFilterPipe
+    HeroFilterPipe,
+    AddHeroComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

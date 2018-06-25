@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './hero';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -14,5 +13,15 @@ export class HeroService {
 
   getHeroes():Observable<Hero[]>{
     return this.http.get<Hero[]>(this.heroesUrl);
+  }
+
+  addHero(hero:Hero):Observable<Hero>{
+    const formData = new FormData();
+    for (let key in hero) {
+      formData.append(key,hero[key]);
+    }
+    const headers:HttpHeaders = new HttpHeaders();
+    headers.append('Content-Type','');
+    return this.http.post<Hero>(this.heroesUrl,formData,{headers});
   }
 }

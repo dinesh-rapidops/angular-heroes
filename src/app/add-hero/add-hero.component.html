@@ -1,0 +1,32 @@
+<form (ngSubmit)="saveHero(heroForm)" #heroForm="ngForm">
+  
+  Name: <input name="name" required [(ngModel)]="hero.name" #nameField>
+  <br> Name classes :: {{nameField.className}}
+
+  <br><br>
+  
+  Gender:   
+  <input type="radio" name="gender" value="male" checked [(ngModel)]="hero.gender"> Male
+  <input type="radio" name="gender" value="female" [(ngModel)]="hero.gender"> Female
+  <br><br>
+  
+  Can Fly: 
+  <input type="checkbox" name="superPowers" [(ngModel)]="hero.canFly">
+  <br><br>
+
+  Location: 
+  <select [(ngModel)]="hero.location" name="location">
+    <option value="Earth">Earth</option>
+    <option value="Asgard">Asgard</option>
+  </select>
+  <br><br>
+
+  photo: 
+  <input type="file" name="file" id="file" (change)="fileChanged()">
+  <br><br>
+
+  <button type="submit" [disabled]="!heroForm.form.valid">Submit</button>
+
+</form>
+
+Hero: {{ hero| json}}
