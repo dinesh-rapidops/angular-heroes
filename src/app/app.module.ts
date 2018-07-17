@@ -8,7 +8,8 @@ import { HeroListComponent } from './hero-list/hero-list.component';
 import { HighlightDirective } from './highlight.directive';
 import { HeroFilterPipe } from './hero-filter.pipe';
 import { AddHeroComponent } from './add-hero/add-hero.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './/app-routing.module'; 
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
