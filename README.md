@@ -1,4 +1,4 @@
-#Routing 
+##Routing 
 
 Add new module
 ```cmd 
@@ -40,15 +40,15 @@ Now let's fix the little issue when saving the hero form
 goto `add-hero.component.ts` file and change the `saveHero` function as following 
 
 ``` typescript
-  saveHero(form) {
-    if (form.invalid) {
-      alert('form is invalid');
-    } else {
-      this.heroService.addHero(this.hero).subscribe(() => {
-        this.router.navigate(['heroes']);
-      });
-    }
+saveHero(form) {
+  if (form.invalid) {
+    alert('form is invalid');
+  } else {
+    this.heroService.addHero(this.hero).subscribe(() => {
+      this.router.navigate(['heroes']);
+    });
   }
+}
 ```
 
 Create the separate hero detail page , for this first let's change the navigation from list page. Change following to `hero-list-component.html`
@@ -62,15 +62,15 @@ Create the separate hero detail page , for this first let's change the navigatio
 
 Change the following inside the `hero-detail.component.ts` file
 ```typescript
-  constructor(private route: ActivatedRoute,
-              private heroSerivce: HeroService) { }
+constructor(private route: ActivatedRoute,
+            private heroSerivce: HeroService) { }
 
-  ngOnInit() {
-    this.heroSerivce.getHeroDetail(this.route.snapshot.params.id)
-      .subscribe((data) => {
-        this.hero = data;
-      });
-  }
+ngOnInit() {
+  this.heroSerivce.getHeroDetail(this.route.snapshot.params.id)
+    .subscribe((data) => {
+      this.hero = data;
+    });
+}
 ```
 
 
