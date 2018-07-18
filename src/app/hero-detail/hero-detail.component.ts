@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Hero } from '../hero';
+import {ActivatedRoute} from '@angular/router';
+import {HeroService} from '../hero.service';
 
 @Component({
   selector: 'app-hero-detail',
@@ -10,12 +12,17 @@ export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
   @Output() whoIam = new EventEmitter();
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+              private heroSerivce: HeroService) { }
 
   ngOnInit() {
+    this.heroSerivce.getHeroDetail(this.route.snapshot.params.id)
+      .subscribe((data) => {
+        this.hero = data;
+      });
   }
 
-  onIdentityCheck(){
+  onIdentityCheck() {
     this.whoIam.emit(this.hero);
   }
 }

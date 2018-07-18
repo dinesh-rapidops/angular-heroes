@@ -1,6 +1,5 @@
-<app-hero-detail [hero]="selectedHero" *ngIf="selectedHero" (whoIam)="hilightSelected($event)"></app-hero-detail>
 <h2>Hero List</h2>
-Selected Hero =  {{selectedHero?.name}}
-<li *ngFor="let hero of heroes" appHighlight (click)="setSelectedHero(hero.id)" [style.background]="hilightId===hero.id?'red':''">
-    {{hero.id}} - {{hero.name | heroFilter}}
+<li *ngFor="let hero of heroes"
+    [routerLink]="['/hero-detail', 5]">
+  {{hero.name}}
 </li>

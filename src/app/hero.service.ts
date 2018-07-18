@@ -15,7 +15,7 @@ export class HeroService {
     return this.http.get<Hero[]>(this.heroesUrl);
   }
 
-  addHero(hero:Hero):Observable<Hero>{
+  addHero(hero: Hero):Observable<Hero>{
     const formData = new FormData();
     for (let key in hero) {
       formData.append(key,hero[key]);
@@ -23,5 +23,9 @@ export class HeroService {
     const headers:HttpHeaders = new HttpHeaders();
     headers.append('Content-Type','');
     return this.http.post<Hero>(this.heroesUrl,formData,{headers});
+  }
+
+  getHeroDetail(id):Observable<Hero>{
+    return this.http.get<Hero[]>(this.heroesUrl+'/'+id);
   }
 }

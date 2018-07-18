@@ -36,4 +36,41 @@ Set the `app.component.html` file with following content
 <router-outlet></router-outlet>
 ```
 
+Now let's fix the little issue when saving the hero form 
+goto `add-hero.component.ts` file and change the `saveHero` function as following 
+
+``` typescript
+  saveHero(form) {
+    if (form.invalid) {
+      alert('form is invalid');
+    } else {
+      this.heroService.addHero(this.hero).subscribe(() => {
+        this.router.navigate(['heroes']);
+      });
+    }
+  }
+```
+
+Create the separate hero detail page , for this first let's change the navigation from list page. Change following to `hero-list-component.html`
+```html
+<h2>Hero List</h2>
+<li *ngFor="let hero of heroes"
+    [routerLink]="['/hero-detail', 5]">
+  {{hero.name}}
+</li>
+```
+
+Change the following inside the `hero-detail.component.ts` file
+```typescript
+  constructor(private route: ActivatedRoute,
+              private heroSerivce: HeroService) { }
+
+  ngOnInit() {
+    this.heroSerivce.getHeroDetail(this.route.snapshot.params.id)
+      .subscribe((data) => {
+        this.hero = data;
+      });
+  }
+```
+
 
