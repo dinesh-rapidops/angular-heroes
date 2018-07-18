@@ -1,32 +1,36 @@
-<form (ngSubmit)="saveHero(heroForm)" #heroForm="ngForm">
-  
-  Name: <input name="name" required [(ngModel)]="hero.name" #nameField>
-  <br> Name classes :: {{nameField.className}}
+<form [formGroup]="heroForm">
+
+  <div [ngClass]="{'hide': !showSuccessMessage}" style="background: lightblue;color: green;padding: 10px;margin: 10px">Hero Saved Successfully</div>
+
+  Name: <input formControlName="name" required>
+  <br>
+
+  <span style="color: red" *ngIf="!heroForm.controls.name.valid && heroForm.controls.name.touched ">Name is required</span>
 
   <br><br>
-  
-  Gender:   
-  <input type="radio" name="gender" value="male" checked [(ngModel)]="hero.gender"> Male
-  <input type="radio" name="gender" value="female" [(ngModel)]="hero.gender"> Female
-  <br><br>
-  
-  Can Fly: 
-  <input type="checkbox" name="superPowers" [(ngModel)]="hero.canFly">
+
+  Gender:
+  <input type="radio" formControlName="gender" value="male" > Male
+  <input type="radio" formControlName="gender" value="female"> Female
   <br><br>
 
-  Location: 
-  <select [(ngModel)]="hero.location" name="location">
+  Can Fly:
+  <input type="checkbox" formControlName="superPowers">
+  <br><br>
+
+  Location:
+  <select  formControlName="location">
     <option value="Earth">Earth</option>
     <option value="Asgard">Asgard</option>
   </select>
   <br><br>
 
-  photo: 
+  photo:
   <input type="file" name="file" id="file" (change)="fileChanged()">
   <br><br>
 
-  <button type="submit" [disabled]="!heroForm.form.valid">Submit</button>
+  <button type="submit" (click)="saveHero()" [disabled]="!heroForm.valid">Submit</button>
 
 </form>
 
-Hero: {{ hero| json}}
+Hero: {{ heroForm.value| json}}
