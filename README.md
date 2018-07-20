@@ -52,6 +52,11 @@ Change the html of `add-hero.component.html` file to
 Hero: {{ hero| json}}
 ```
 
+Add new hero property inside the `add-hero.component.ts`
+```typescript
+hero: Hero
+```
+
 Now create the save hero function inside the ts file
 ```typescript
 saveHero(form){
