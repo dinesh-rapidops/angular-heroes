@@ -12,7 +12,7 @@ export class Hero {
 
 Import file into `app.compontent.ts`.
 ```typescript
-import { Hero } from '../hero';
+import { Hero } from './hero';
 ```
 
 Add new hero 
