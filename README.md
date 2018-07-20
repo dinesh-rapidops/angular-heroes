@@ -1,4 +1,4 @@
-#Input / Output
+# Input / Output
 
 ## Input
 Define one public variable inside the app component 
