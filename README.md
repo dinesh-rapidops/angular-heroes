@@ -60,3 +60,17 @@ export class HeroFilterPipe implements PipeTransform {
 
 }
 ```
+
+
+## Usage
+
+Copy the following html in `hero-list.component.html`
+
+```html
+<app-hero-detail [hero]="selectedHero" *ngIf="selectedHero" (whoIam)="hilightSelected($event)"></app-hero-detail>
+<h2>Hero List</h2>
+Selected Hero =  {{selectedHero?.name}}
+<li *ngFor="let hero of heroes" appHighlight (click)="setSelectedHero(hero.id)" [style.background]="hilightId===hero.id?'red':''">
+    {{hero.id}} - {{hero.name | heroFilter}}
+</li>
+```
