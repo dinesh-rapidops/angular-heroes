@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Hero } from './hero';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class HeroService {
   heroesUrl = 'http://localhost:3000/heroes';
+  heroAddedEvent: EventEmitter <any> = new EventEmitter();
   constructor(private http:HttpClient) { }
 
   getHeroes():Observable<Hero[]>{
@@ -23,5 +24,9 @@ export class HeroService {
     const headers:HttpHeaders = new HttpHeaders();
     headers.append('Content-Type','');
     return this.http.post<Hero>(this.heroesUrl,formData,{headers});
+  }
+
+  heroAddedNotify(data) {
+    this.heroAddedEvent.emit(data);
   }
 }
