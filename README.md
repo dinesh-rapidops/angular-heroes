@@ -1,4 +1,5 @@
 #Reactive Forms
+
 First we need to add   `ReactiveFormsModule`  into the imports Array at last to support reactive form feature. in `app.module.ts` . It should look like this
 
 ```typescript
@@ -20,7 +21,7 @@ Create new add-hero-rf component
 ng generate component add-hero-rf
 ```
 
-add this component to `app.component.html` file
+add this component to `app.component.html` file and comment `<app-add-hero></app-add-hero>`
 ```html
 <!-- <app-hero-detail></app-hero-detail> -->
 <!-- <app-add-hero></app-add-hero> -->
@@ -198,8 +199,8 @@ Thats It . AT LAST DELETE `<app-add-hero-rf></app-add-hero-rf>` COMPONENT FROM `
 
 ```typescript
 <!-- <app-hero-detail></app-hero-detail> -->
-<app-add-hero></app-add-hero> 
-<!--<app-add-hero-rf></app-add-hero-rf>-->
+<app-add-hero></app-add-hero>
+<!-- <app-add-hero-rf></app-add-hero-rf> -->
 <app-hero-list></app-hero-list>
 ```
 
