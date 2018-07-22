@@ -73,7 +73,7 @@ Create the separate hero detail page , for this first let's change the navigatio
 Add new method inside the `hero.service.ts`
 ```typescript
  getHeroDetail(id):Observable<Hero>{
-    return this.http.get<Hero[]>(this.heroesUrl+'/'+id);
+    return this.http.get<Hero>(this.heroesUrl+'/'+id);
   }
 ```  
 
