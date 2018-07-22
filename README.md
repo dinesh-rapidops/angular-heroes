@@ -1,7 +1,7 @@
 # Input / Output
 
 ## Input
-Define one public variable inside the app component 
+Define one public variable inside the list component 
 ```typescript
   selectedHero:Hero
 ```
