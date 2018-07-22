@@ -70,6 +70,13 @@ Create the separate hero detail page , for this first let's change the navigatio
 </li>
 ```
 
+Add new method inside the `hero.service.ts`
+```typescript
+ getHeroDetail(id):Observable<Hero>{
+    return this.http.get<Hero[]>(this.heroesUrl+'/'+id);
+  }
+```  
+
 Change the following inside the `hero-detail.component.ts` file
 ```typescript
 constructor(private route: ActivatedRoute,
