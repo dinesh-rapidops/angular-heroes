@@ -51,6 +51,16 @@ saveHero(form) {
 }
 ```
 
+Set the constructor as following in `add-hero.component.ts`
+```typescript
+constructor(private heroService: HeroService, private router: Router) { }
+```
+
+with following import statement
+```typescript
+import {Router} from '@angular/router';
+```
+
 Create the separate hero detail page , for this first let's change the navigation from list page. Change following to `hero-list-component.html`
 ```html
 <h2>Hero List</h2>
