@@ -95,4 +95,11 @@ import {ActivatedRoute} from '@angular/router';
 import { HeroService } from '../hero.service';
 ```
 
+Change the html file for the `hero-detail.component.html`
+```html 
+<h2>{{ hero?.name }} Details</h2>
+<div><span>id: </span>{{hero?.id}}</div>
+<div><span>name: </span>{{hero?.name}}</div>
+```
+
 
