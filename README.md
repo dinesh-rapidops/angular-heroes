@@ -65,7 +65,7 @@ Create the separate hero detail page , for this first let's change the navigatio
 ```html
 <h2>Hero List</h2>
 <li *ngFor="let hero of heroes"
-    [routerLink]="['/hero-detail', 5]">
+    [routerLink]="['/hero-detail', hero.id]">
   {{hero.name}}
 </li>
 ```
