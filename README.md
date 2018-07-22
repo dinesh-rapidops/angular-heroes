@@ -82,5 +82,10 @@ ngOnInit() {
     });
 }
 ```
+with following import statement 
+```typescript
+import {ActivatedRoute} from '@angular/router';
+import { HeroService } from '../hero.service';
+```
 
 
